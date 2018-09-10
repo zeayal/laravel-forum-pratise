@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Thread extends Model
 {
     //
+    protected $fillable = ['user_id', 'title', 'body'];
 
     public function path()
     {
@@ -21,5 +22,9 @@ class Thread extends Model
     public function owner()
     {
         return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function addReply($reply) {
+        $this->replies()->create($reply);
     }
 }
